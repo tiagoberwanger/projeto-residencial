@@ -6,7 +6,7 @@ from sqlalchemy.sql import func
 class Inquilino(Base):
     __tablename__ = "inquilinos"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     nome = Column(String, nullable=False)
     cpf = Column(Integer, nullable=False)
     data_nascimento = Column(Date, nullable=True)

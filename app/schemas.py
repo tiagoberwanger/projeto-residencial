@@ -3,7 +3,6 @@ from pydantic import BaseModel
 
 
 class Inquilino(BaseModel):
-    id: int
     nome: str
     cpf: int
     data_nascimento: date | None = None
