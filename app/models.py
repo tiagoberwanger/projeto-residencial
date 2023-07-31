@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 from .database import Base
+from .schemas import TiposEnum, StatusEnum
 
 
 class Inquilino(Base):
@@ -22,13 +23,14 @@ class Imovel(Base):
     __tablename__ = "imoveis"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    tipo = Column(Enum, nullable=False)
+    tipo = Column(Enum(TiposEnum), nullable=False)
     numero = Column(Integer, nullable=False)
-    descricao = Column(String, nullable=True)
     disponivel = Column(Boolean, default=True, nullable=False)
+    descricao = Column(String, nullable=True)
     valor = Column(DECIMAL, nullable=True)
     endereco = Column(String, nullable=True)
     area = Column(Integer, nullable=True)
+    ultima_alteracao = Column(TIMESTAMP(timezone=True), default=None, onupdate=func.now())
 
 
 class Contrato(Base):
@@ -42,4 +44,5 @@ class Contrato(Base):
     data_inicio = Column(Date, nullable=False)
     data_termino = Column(Date, nullable=False)
     valor_aluguel = Column(DECIMAL, nullable=False)
-    status = Column(Enum, nullable=False)
+    status = Column(Enum(StatusEnum), nullable=False)
+    ultima_alteracao = Column(TIMESTAMP(timezone=True), default=None, onupdate=func.now())
