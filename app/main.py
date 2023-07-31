@@ -26,8 +26,3 @@ app.add_middleware(
 app.include_router(inquilinos.crud.router, tags=['Inquilinos'], prefix='/api/inquilinos')
 app.include_router(imoveis.crud.router, tags=['Imoveis'], prefix='/api/imoveis')
 app.include_router(contratos.crud.router, tags=['Contratos'], prefix='/api/contratos')
-
-
-@app.get("/api/healthchecker")
-def root():
-    return {"message": "Welcome to FastAPI with SQLAlchemy"}
