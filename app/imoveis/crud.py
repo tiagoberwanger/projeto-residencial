@@ -12,7 +12,7 @@ router = APIRouter()
 def obter_imoveis(db: Session = Depends(get_db)):
     imoveis = gateway.obter_imoveis(db=db)
 
-    return {'quantidade': len(imoveis), 'imovels': imoveis}
+    return {'quantidade': len(imoveis), 'imoveis': imoveis}
 
 
 @router.post('/', status_code=status.HTTP_201_CREATED)

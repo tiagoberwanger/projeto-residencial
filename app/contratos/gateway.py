@@ -8,7 +8,7 @@ def criar_contrato(dados, db):
     return criar(models.Contrato, dados, db)
 
 
-def contratos(db, pagina: int = 1, limite: int = 10):
+def obter_contratos(db, pagina: int = 1, limite: int = 10):
     return obter(models.Contrato, page=pagina, limit=limite, db=db)
 
 

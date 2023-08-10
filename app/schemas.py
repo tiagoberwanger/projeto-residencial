@@ -13,6 +13,7 @@ class Inquilino(BaseModel):
     ultima_alteracao: datetime | None = None
 
     class Config:
+        orm_mode: bool = True
         from_attributes = True
         populate_by_name = True
         arbitrary_types_allowed = True
@@ -35,6 +36,7 @@ class Imovel(BaseModel):
     ultima_alteracao: datetime | None = None
 
     class Config:
+        orm_mode: bool = True
         from_attributes = True
         populate_by_name = True
         arbitrary_types_allowed = True
@@ -56,6 +58,7 @@ class Contrato(BaseModel):
     ultima_alteracao: datetime | None = None
 
     class Config:
+        orm_mode: bool = True
         from_attributes = True
         populate_by_name = True
         arbitrary_types_allowed = True
