@@ -1,13 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app import models, inquilinos, imoveis, contratos
-from .contratos import crud
-from .database import engine
-from .imoveis import crud
-from .inquilinos import crud
 
-models.Base.metadata.create_all(bind=engine)
+from database import engine
+from models import Base
+from inquilinos import crud as inquilinos_crud
+from contratos import crud as contratos_crud
+from imoveis import crud as imoveis_crud
+
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -23,6 +25,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(inquilinos.crud.router, tags=['Inquilinos'], prefix='/api/inquilinos')
-app.include_router(imoveis.crud.router, tags=['Imoveis'], prefix='/api/imoveis')
-app.include_router(contratos.crud.router, tags=['Contratos'], prefix='/api/contratos')
+app.include_router(inquilinos_crud.router, tags=['Inquilinos'], prefix='/api/inquilinos')
+app.include_router(imoveis_crud.router, tags=['Imoveis'], prefix='/api/imoveis')
+app.include_router(contratos_crud.router, tags=['Contratos'], prefix='/api/contratos')

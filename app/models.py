@@ -2,8 +2,8 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Date, Enum,
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
-from .database import Base
-from .schemas import TiposEnum, StatusEnum
+from database import Base
+from schemas import TiposEnum, StatusEnum
 
 
 class Inquilino(Base):
