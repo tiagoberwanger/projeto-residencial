@@ -38,5 +38,3 @@ def excluir(model, id, db):
     item_para_remover.delete(synchronize_session=False)
 
     db.commit()
-
-    return item_para_remover
