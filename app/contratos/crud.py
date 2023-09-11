@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, Depends
 from sqlalchemy.orm import Session
 
-import models
+import contratos.gateway as gateway
 import schemas
 from database import get_db
 
@@ -9,18 +9,12 @@ router = APIRouter()
 
 
 @router.get('/', status_code=status.HTTP_200_OK)
-def obter_contratos(db: Session = Depends(get_db), limit: int = 10, page: int = 1):
-    skip = (page - 1) * limit
-    contratos = db.query(models.Contrato).limit(limit).offset(skip).all()
+def obter_contratos(db: Session = Depends(get_db)):
+    contratos = gateway.obter_contratos(db=db)
 
-    return {'results': len(contratos), 'contratos': contratos}
+    return {'quantidade': len(contratos), 'contratos': contratos}
 
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
-def criar_contrato(payload: schemas.Contrato, db: Session = Depends(get_db)):
-    novo_contrato = models.Contrato(**payload.model_dump())
-    db.add(novo_contrato)
-    db.commit()
-    db.refresh(novo_contrato)
-
-    return {"contrato": novo_contrato}
+def criar_contrato(dados: schemas.Contrato, db: Session = Depends(get_db)):
+    return gateway.criar_contrato(dados, db)
