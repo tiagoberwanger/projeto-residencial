@@ -14,7 +14,7 @@ class Inquilino(BaseModel):
     ultima_alteracao: datetime | None = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class TiposEnum(Enum):
@@ -34,7 +34,7 @@ class Imovel(BaseModel):
     ultima_alteracao: datetime | None = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class StatusEnum(Enum):
@@ -53,4 +53,4 @@ class Contrato(BaseModel):
     ultima_alteracao: datetime | None = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
