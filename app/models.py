@@ -18,8 +18,6 @@ class Inquilino(Base):
     email = Column(String, nullable=True)
     ultima_alteracao = Column(TIMESTAMP(timezone=True), default=func.now(), onupdate=func.now())
 
-    contrato = relationship('Contrato', backref='inquilino')
-
 
 class Imovel(Base):
     __tablename__ = "imoveis"
@@ -34,8 +32,6 @@ class Imovel(Base):
     area = Column(Integer, nullable=True)
     ultima_alteracao = Column(TIMESTAMP(timezone=True), default=func.now(), onupdate=func.now())
 
-    contrato = relationship('Contrato', backref='imovel')
-
 
 class Contrato(Base):
     __tablename__ = "contratos"
@@ -49,5 +45,5 @@ class Contrato(Base):
 
     inquilino_id = Column(Integer, ForeignKey("inquilinos.id"), nullable=False)
     imovel_id = Column(Integer, ForeignKey("imoveis.id"), nullable=False)
-    inquilino = relationship('Inquilino', back_populates='contratos')
-    imovel = relationship('Imovel', back_populates='contratos')
+    inquilino = relationship('Inquilino', backref='contratos')
+    imovel = relationship('Imovel', backref='contratos')
