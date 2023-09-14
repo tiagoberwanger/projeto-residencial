@@ -1,25 +1,23 @@
+from decimal import Decimal
 from enum import Enum
 from datetime import date, datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class Inquilino(BaseModel):
     nome: str
-    cpf: int
+    cpf: str
     data_nascimento: date | None = None
     cidade: str | None = None
     estado: str | None = None
-    email: str | None = None
+    email: EmailStr | None = None
     ultima_alteracao: datetime | None = None
 
     class Config:
-        orm_mode: bool = True
-        from_attributes = True
-        populate_by_name = True
-        arbitrary_types_allowed = True
+        orm_mode = True
 
 
-class TiposEnum(str, Enum):
+class TiposEnum(Enum):
     QUARTO = 'quarto'
     QUITINETE = 'quitinete'
     APARTAMENTO = 'apartamento'
@@ -30,16 +28,13 @@ class Imovel(BaseModel):
     numero: int
     disponivel: bool
     descricao: str | None = None
-    valor: int | None = None
+    valor: Decimal | None = None
     endereco: str | None = None
     area: int | None = None
     ultima_alteracao: datetime | None = None
 
     class Config:
-        orm_mode: bool = True
-        from_attributes = True
-        populate_by_name = True
-        arbitrary_types_allowed = True
+        orm_mode = True
 
 
 class StatusEnum(Enum):
@@ -53,12 +48,9 @@ class Contrato(BaseModel):
     imovel_id: int
     data_inicio: datetime
     data_termino: datetime
-    valor_aluguel: int
+    valor_aluguel: Decimal
     status: StatusEnum
     ultima_alteracao: datetime | None = None
 
     class Config:
-        orm_mode: bool = True
-        from_attributes = True
-        populate_by_name = True
-        arbitrary_types_allowed = True
+        orm_mode = True
